@@ -1,13 +1,13 @@
-import datetime
-import asyncore
-import smtpd
+import datetime, asyncore, smtpd, os
+
+directory = "/var/lib/meatball/mail"
 
 class EmailServer(smtpd.SMTPServer):
 	index = 0
 
 	def process_message(self, p, mf, rt, data):
-		filename = '/tmp/%s-%d.eml' % (datetime.datetime.now().strftime('%Y%m%d%H%M%S'), self.index)
-		with open(filename) as f:
+		filename = '%s/%s-%d.eml' % (directory, datetime.datetime.now().strftime('%Y%m%d%H%M%S'), self.index)
+		with open(filename, "w") as f:
 			f.write(data)
 		print(filename, "received")
 		self.index += 1

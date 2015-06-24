@@ -1,0 +1,8 @@
+[Unit]
+Description=Meatball SMTP Server
+
+[Service]
+ExecStart=/usr/bin/python3 /root/src/meatball/smtp.py
+
+[Install]
+WantedBy=multi-user.target
