@@ -1,7 +1,17 @@
 [Unit]
 Description=Meatball SMTP Server
+Requires=couchdb.service
+After=couchdb.service
 
 [Service]
+User=meatball
+Group=meatball
+Type=simple
+StandardOutput=journal
+StandardError=journal
+Restart=always
+StartLimitInterval=10
+StartLimitBurst=5
 ExecStart=/usr/bin/python3 /root/src/meatball/smtp.py
 
 [Install]
